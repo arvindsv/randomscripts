@@ -17,8 +17,11 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  var colorOfInbox = $('a[name="lnkFldr"][title="Inbox"]').parent('td').css('background-color');
+  var tdInWhichInboxIs = $('a[name="lnkFldr"][title="Inbox"]').parent('td');
+  var colorOfInbox = tdInWhichInboxIs.css('background-color');
   var isInInbox = (typeof colorOfInbox != "undefined") && (colorOfInbox != "rgba(0, 0, 0, 0)");
+  var numberOfUnreadMessages = tdInWhichInboxIs.find('span.unrd').text();
+  document.title = numberOfUnreadMessages + " " + document.title;
 
   if (isInInbox) {
     setInterval(function(){ window.location.reload(); }, 60000);
