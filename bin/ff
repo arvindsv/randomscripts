@@ -21,10 +21,14 @@ ff() { myfind "f" "$1"; }
 fd() { myfind "d" "$1"; }
 
 fn() {
+  if [[ "$1" && "$1" =~ ^[0-9]+$ ]]; then
     item=${FFOUND[$1-1]}
     if [ -z "$item" ]; then return; fi
     if [ "$PWD" != "$FFOUND_PWD" ]; then echo -n $FFOUND_PWD/; fi
     echo ${item##$FFOUND_PWD//}
+  elif [ "$1" ]; then
+    echo $1
+  fi
 }
 
 v() { vim "$(fn $1)";  }
